@@ -1,0 +1,22 @@
+apiVersion: carto.run/v1alpha1
+kind: Deliverable
+metadata:
+  name: birds
+  labels:
+    app.tanzu.vmware.com/workload-type: micropets-delivery-native
+    app.kubernetes.io/part-of: micropets-app
+    carto.run/workload-name: birds
+    carto.run/supply-chain-name: micropet-service-supply-chain-git
+spec:
+  #serviceAccountName: tap-default
+  serviceAccountName: cartographer-deliverable-sa
+  source:
+    git:
+      url: http://github.com/bmoussaud/micropets-app-gitops.git
+      ref:
+        branch: main
+  params:
+  - name: environment
+    value: azure/aks-eu-tap-2
+  - name: application
+    value: micropets/current
